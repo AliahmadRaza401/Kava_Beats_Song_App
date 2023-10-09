@@ -30,33 +30,35 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
         child: Drawer(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           width: width * 0.75,
-          child: ListView(
+          child: Column(
             // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
             children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: primaryClr,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    // CircleAvatar(
-                    //   radius: 50,
-                    //   backgroundImage: drawerPhoto,
-                    // ),
-                    Text(
-                      "Kava Beats",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Kavoon"),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
+              Container(
+                width: width,
+                child: DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: primaryClr,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: const [
+                      // CircleAvatar(
+                      //   radius: 50,
+                      //   backgroundImage: drawerPhoto,
+                      // ),
+                      Text(
+                        "Kava Beats",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: "Kavoon"),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               ListTile(
@@ -116,18 +118,13 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   Navigator.pop(context);
                 },
                 trailing: ChangeThemeButtonWidget(),
-                // Switch(
-                //   onChanged: (val) {
-                //     setState(() {
-                //       isSwitched = val;
-                //     });
-                //   },
-                //   value: isSwitched,
-                //   activeColor: primaryClr,
-                //   activeTrackColor: primaryClr.withOpacity(0.3),
-                //   inactiveThumbColor: Colors.white,
-                //   inactiveTrackColor: Colors.grey.withOpacity(0.3),
-                // ),
+              ),
+              Spacer(),
+              Container(
+                  child: Text('Powered by M4 Limited',
+                      style: TextStyle(fontSize: 14))),
+              SizedBox(
+                height: 30,
               ),
             ],
           ),
