@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:kava_beats_app/Screens/Book1/book1.dart';
 import 'package:kava_beats_app/Screens/Book2/book2.dart';
-import 'package:kava_beats_app/Screens/Drawer/drawer.dart';
+import 'package:kava_beats_app/Screens/Drawer/drawer.dart' as drawe;
 import 'package:kava_beats_app/Screens/Login/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
-        // drawer: const NavigationDrawer(),
+        drawer: drawe.NavigationDrawer(),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
