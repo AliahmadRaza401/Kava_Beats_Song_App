@@ -1,4 +1,4 @@
-package com.example.kava_beats_app
+package com.kavabeats.song_app
 
 import io.flutter.embedding.android.FlutterActivity
 
