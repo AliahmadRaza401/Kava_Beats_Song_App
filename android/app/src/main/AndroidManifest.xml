@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="kava_beats_app"
+        android:label="Kava Beats"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
