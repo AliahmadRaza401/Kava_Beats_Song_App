@@ -25,21 +25,21 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Theme.of(context).backgroundColor,
           iconTheme: Theme.of(context).appBarTheme.iconTheme,
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginScreen()));
-                  },
-                  icon: const Icon(
-                    CupertinoIcons.person_alt_circle,
-                    color: Colors.white,
-                    size: 33,
-                  )),
-            )
+            // Padding(
+            //   padding: const EdgeInsets.only(right: 10),
+            //   child: IconButton(
+            //       onPressed: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => const LoginScreen()));
+            //       },
+            //       icon: const Icon(
+            //         CupertinoIcons.person_alt_circle,
+            //         color: Colors.white,
+            //         size: 33,
+            //       )),
+            // )
           ],
         ),
         drawer: drawe.NavigationDrawer(),

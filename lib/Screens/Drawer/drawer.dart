@@ -71,16 +71,16 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   Navigator.pop(context);
                 },
               ),
-              ListTile(
-                leading: Icon(
-                  Icons.feedback_rounded,
-                  color: primaryClr,
-                ),
-                title: const Text('Feedback', style: TextStyle(fontSize: 14)),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
+              // ListTile(
+              //   leading: Icon(
+              //     Icons.feedback_rounded,
+              //     color: primaryClr,
+              //   ),
+              //   title: const Text('Feedback', style: TextStyle(fontSize: 14)),
+              //   onTap: () {
+              //     Navigator.pop(context);
+              //   },
+              // ),
               ListTile(
                 leading: Icon(
                   Icons.share,
