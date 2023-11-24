@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kava_beats_app/Widgets/theme_toggle_button.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:kava_beats_app/Screens/Book1/book1.dart';
 import 'package:kava_beats_app/Screens/Book2/book2.dart';
@@ -117,7 +118,7 @@ Widget songCard(
     child: Stack(
       children: [
         Card(
-          elevation: 25,
+          elevation: 20,
           margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -158,7 +159,7 @@ Widget songCard(
             right: 10,
             child: Card(
               margin: EdgeInsets.zero,
-              elevation: 3,
+              elevation: 1,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(50),
               ),
@@ -168,7 +169,7 @@ Widget songCard(
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 5, 8, 5),
+                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -182,9 +183,12 @@ Widget songCard(
                         width: 5,
                       ),
                       Icon(
-                        Icons.arrow_forward,
-                        color: Theme.of(context).iconTheme.color,
-                        size: 22,
+                        Icons.arrow_forward_ios,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black,
+                        // Theme.of(context).iconTheme.color,
+                        size: 16,
                       ),
                     ],
                   ),

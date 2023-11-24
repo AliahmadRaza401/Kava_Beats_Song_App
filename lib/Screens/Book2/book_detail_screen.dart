@@ -11,7 +11,7 @@ class BookDetailScreen extends StatefulWidget {
 }
 
 class _BookDetailScreenState extends State<BookDetailScreen> {
-  double textSize = 18;
+  double textSize = 14;
 
   void share() async {
     final box = context.findRenderObject() as RenderBox?;

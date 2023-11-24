@@ -64,7 +64,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ListTile(
                 leading: Icon(
                   CupertinoIcons.home,
-                  color: primaryClr,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : primaryClr,
                 ),
                 title: const Text('Home', style: TextStyle(fontSize: 14)),
                 onTap: () {
@@ -84,7 +86,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ListTile(
                 leading: Icon(
                   Icons.share,
-                  color: primaryClr,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : primaryClr,
                 ),
                 title: const Text('Share', style: TextStyle(fontSize: 14)),
                 onTap: () {
@@ -95,7 +99,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ListTile(
                 leading: Icon(
                   Icons.contact_phone,
-                  color: primaryClr,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : primaryClr,
                 ),
                 title: const Text('Contact Us', style: TextStyle(fontSize: 14)),
                 onTap: () {
@@ -111,7 +117,9 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
               ListTile(
                 leading: Icon(
                   CupertinoIcons.moon_stars_fill,
-                  color: primaryClr,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : primaryClr,
                 ),
                 title: const Text('Dark Mode', style: TextStyle(fontSize: 14)),
                 onTap: () {

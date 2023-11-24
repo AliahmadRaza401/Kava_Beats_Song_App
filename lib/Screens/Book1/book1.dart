@@ -2787,12 +2787,12 @@ class _Book1ScreenState extends State<Book1Screen> {
                               padding: const EdgeInsets.only(
                                   bottom: 10, right: 0, left: 0),
                               child: Card(
-                                margin: EdgeInsets.zero,
+                                margin: EdgeInsets.symmetric(horizontal: 20),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    // color: Colors.grey.withOpacity(0.2),
+                                    color: Colors.grey.withOpacity(0.2),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: ListTile(

@@ -26,6 +26,7 @@ class ThemeProvider extends ChangeNotifier {
 
   void toggleTheme(bool isOn) async {
     themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+    
     await _themePreferences.setThemeMode(themeMode);
     notifyListeners();
   }
