@@ -108,12 +108,20 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
                     const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
                 child: Column(
                   children: [
-                    Text(
-                        content == ""
-                            ? widget.book!.content.toString()
-                            : content,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: textSize)),
+                    loading
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: CircularProgressIndicator(
+                              color:
+                                  Theme.of(context).appBarTheme.backgroundColor,
+                            ),
+                          )
+                        : Text(
+                            content == ""
+                                ? widget.book!.content.toString()
+                                : content,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: textSize)),
                     const SizedBox(
                       height: 70,
                     ),
@@ -206,7 +214,11 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     );
   }
 
+  bool loading = false;
   void _translateText(code) async {
+    setState(() {
+      loading = true;
+    });
     translator
         .translate(widget.book!.content.toString(), to: code)
         .then((result) {
@@ -214,6 +226,7 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
 
       setState(() {
         content = result.toString();
+        loading = false;
       });
     });
   }

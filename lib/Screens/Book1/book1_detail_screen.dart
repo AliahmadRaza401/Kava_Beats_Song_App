@@ -114,12 +114,20 @@ class _Book1DetailScreenState extends State<Book1DetailScreen> {
                     const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
                 child: Column(
                   children: [
-                    Text(
-                        content == ""
-                            ? widget.book!.content.toString()
-                            : content,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: textSize)),
+                    loading
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 40),
+                            child: CircularProgressIndicator(
+                              color:
+                                  Theme.of(context).appBarTheme.backgroundColor,
+                            ),
+                          )
+                        : Text(
+                            content == ""
+                                ? widget.book!.content.toString()
+                                : content,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: textSize)),
                     const SizedBox(
                       height: 70,
                     ),
@@ -212,14 +220,19 @@ class _Book1DetailScreenState extends State<Book1DetailScreen> {
     );
   }
 
+  bool loading = false;
   void _translateText(code) async {
+    setState(() {
+      loading = true;
+    });
     translator
         .translate(widget.book!.content.toString(), to: code)
         .then((result) {
-      print("Translated: $result");
+      print("Translated: ");
 
       setState(() {
         content = result.toString();
+        loading = false;
       });
     });
   }
