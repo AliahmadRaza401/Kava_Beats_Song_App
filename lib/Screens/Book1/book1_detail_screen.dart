@@ -185,7 +185,7 @@ class _Book1DetailScreenState extends State<Book1DetailScreen> {
     );
   }
 
-  String _selectedLanguage = 'es';
+  String _selectedLanguage = 'ton';
 
   Widget languageDropDown() {
     return Container(
@@ -196,13 +196,19 @@ class _Book1DetailScreenState extends State<Book1DetailScreen> {
       ),
       child: DropdownButton<String>(
         value: _selectedLanguage,
-        items: _buildLanguageItems(),
+        items: buildLanguageItems(),
         onChanged: (String? newValue) {
           if (newValue != null) {
             setState(() {
               _selectedLanguage = newValue;
             });
-            _translateText(newValue);
+            if (newValue == "ton") {
+              setState(() {
+                content = "";
+              });
+            } else {
+              _translateText(newValue);
+            }
           }
         },
         dropdownColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -248,34 +254,40 @@ class _Book1DetailScreenState extends State<Book1DetailScreen> {
     }
   }
 
-  List<DropdownMenuItem<String>> _buildLanguageItems() {
-    return [
-      DropdownMenuItem<String>(
-        value: 'en',
-        child: Text('English'),
-      ),
-      DropdownMenuItem<String>(
-        value: 'es',
-        child: Text('Spanish'),
-      ),
-      DropdownMenuItem<String>(
-        value: 'pl',
-        child: Text('Polish'),
-      ),
-      DropdownMenuItem<String>(
-        value: 'pt',
-        child: Text('Portuguese'),
-      ),
-      DropdownMenuItem<String>(
-        value: 'it',
-        child: Text('Italian'),
-      ),
-      DropdownMenuItem<String>(
-        value: 'zh-cn',
-        child: Text('Chinese'),
-      ),
-    ];
-  }
+
+}
+
+List<DropdownMenuItem<String>> buildLanguageItems() {
+  return [
+    DropdownMenuItem<String>(
+      value: 'ton',
+      child: Text('Tonga'),
+    ),
+    DropdownMenuItem<String>(
+      value: 'en',
+      child: Text('English'),
+    ),
+    DropdownMenuItem<String>(
+      value: 'es',
+      child: Text('Spanish'),
+    ),
+    DropdownMenuItem<String>(
+      value: 'pl',
+      child: Text('Polish'),
+    ),
+    DropdownMenuItem<String>(
+      value: 'pt',
+      child: Text('Portuguese'),
+    ),
+    DropdownMenuItem<String>(
+      value: 'it',
+      child: Text('Italian'),
+    ),
+    DropdownMenuItem<String>(
+      value: 'zh-cn',
+      child: Text('Chinese'),
+    ),
+  ];
 }
 
 
