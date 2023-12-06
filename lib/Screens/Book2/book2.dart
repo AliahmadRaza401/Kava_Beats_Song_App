@@ -1803,10 +1803,10 @@ class _Book2ScreenState extends State<Book2Screen> {
                                                     book: searchList[index],
                                                   )));
                                     },
-                                    horizontalTitleGap: -10,
+                                    horizontalTitleGap: 10,
                                     leading: Padding(
                                       padding: const EdgeInsets.only(
-                                        top: 4,
+                                        left: 5,
                                       ),
                                       child: Text(
                                         searchList[index].number.toString(),

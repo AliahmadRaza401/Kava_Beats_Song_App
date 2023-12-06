@@ -219,16 +219,27 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
     setState(() {
       loading = true;
     });
-    translator
-        .translate(widget.book!.content.toString(), to: code)
-        .then((result) {
-      print("Translated: ");
+    try {
+      translator
+          .translate(widget.book!.content.toString(), to: code)
+          .then((result) {
+        print("Translated: ");
 
+        setState(() {
+          content = result.toString();
+          loading = false;
+        });
+      });
+    } catch (e) {
+      print('e: ${e}');
       setState(() {
-        content = result.toString();
+        content = "";
         loading = false;
       });
-    });
+      var snackBar =
+          SnackBar(content: Text('Oops! something worng try again later'));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   List<DropdownMenuItem<String>> _buildLanguageItems() {
