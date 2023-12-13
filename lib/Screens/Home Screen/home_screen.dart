@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kava_beats_app/Widgets/theme_toggle_button.dart';
+import 'package:kava_beats_app/Widgets/widgets.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:kava_beats_app/Screens/Book1/book1.dart';
 import 'package:kava_beats_app/Screens/Book2/book2.dart';
@@ -82,10 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         title: "HIVA\nKAKALA")),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Book2Screen()));
+                    AppRoutes.push(context, Book2Screen());
                     //  PersistentNavBarNavigator.pushNewScreen(
                     //     context,
                     //     screen: const Book2Screen(),
