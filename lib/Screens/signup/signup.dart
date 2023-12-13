@@ -3,28 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:kava_beats_app/Screens/Home%20Screen/home_screen.dart';
-import 'package:kava_beats_app/Screens/signup/signup.dart';
+import 'package:kava_beats_app/Screens/Login/login_screen.dart';
 import 'package:kava_beats_app/Widgets/text_fields.dart';
 import 'package:kava_beats_app/controller/auth_controller.dart';
 import 'package:kava_beats_app/services/auth_services.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  bool isTermsConditions = false;
+
   bool isPass = false;
   FocusNode emailFocusNode = FocusNode();
   FocusNode pasFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
 
   AuthController authController = Get.put(AuthController());
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -58,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(
-                              "Login",
+                              "SignUp",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontFamily: "Roboto",
@@ -80,13 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ]),
                         ),
                         SizedBox(height: 20.0),
-                        customInputField(
-                            password,
-                            pasFocusNode,
-                            "Password",
-                            MultiValidator([
-                              authController.requiredValidator,
-                            ]),
+                        customInputField(password, pasFocusNode, "Password",
+                            authController.passwordValidator,
                             isPassword: isPass, onPressed: () {
                           setState(() {
                             isPass = !isPass;
@@ -96,35 +92,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Column(
                       children: [
-                        Obx(
-                          () => authController.loading.value
-                              ? CircularProgressIndicator(
-                                  color: Colors.white,
-                                )
-                              : SizedBox(
-                                  height: 50,
-                                  width: width * 0.85,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.white,
-                                      ),
-                                      onPressed: () {
-                                        if (_formKey.currentState!.validate()) {
-                                          AuthServices.signIn(
-                                              context,
-                                              email.text.toString(),
-                                              password.text.toString());
-                                        }
-                                      },
-                                      child: const Text(
-                                        "Login",
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                ),
-                        ),
+                        Obx(() => authController.loading.value
+                            ? CircularProgressIndicator(color: Colors.white,)
+                            : SizedBox(
+                                height: 50,
+                                width: width * 0.85,
+                                child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {}
+                                      AuthServices.signUp(
+                                          context, email.text, password.text);
+                                    },
+                                    child: const Text(
+                                      "SignUp",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                              )),
                         SizedBox(
                           height: 20,
                         ),
@@ -132,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "if you don't have account? ",
+                              "if you already have an account? ",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontFamily: "Roboto",
@@ -142,10 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => SignupScreen()));
+                                    builder: (context) => LoginScreen()));
                               },
                               child: Text(
-                                "SingUp",
+                                "LogIn",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: "Roboto",

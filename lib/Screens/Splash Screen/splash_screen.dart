@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kava_beats_app/Constants/colors.dart';
 import 'package:kava_beats_app/Screens/Bottom%20Navbar/bottom_navbar.dart';
 import 'package:kava_beats_app/Screens/Home%20Screen/home_screen.dart';
+import 'package:kava_beats_app/Screens/Login/login_screen.dart';
+import 'package:kava_beats_app/Widgets/widgets.dart';
+import 'package:kava_beats_app/services/shearedpref_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,9 +22,14 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(milliseconds: 500), () {
       setState(() => isAnimate = true);
     });
+
+    var userLoggedIn = ShearedprefService.getUserLoggedIn();
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+      if (userLoggedIn == true) {
+        AppRoutes.pushAndRemoveUntil(context, HomeScreen());
+      } else {
+        AppRoutes.pushAndRemoveUntil(context, LoginScreen());
+      }
     });
   }
 

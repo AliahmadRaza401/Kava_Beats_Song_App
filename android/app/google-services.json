@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "967662864720",
+    "project_id": "kava-beats",
+    "storage_bucket": "kava-beats.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967662864720:android:ba5f36b2d9086485660455",
+        "android_client_info": {
+          "package_name": "com.kava.kavabeats"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxzgqTWYnxu2fcj2r0eNmtAFZlIdJIc-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

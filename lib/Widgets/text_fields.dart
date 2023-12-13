@@ -1,6 +1,64 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+Widget customInputField(
+  TextEditingController controller,
+  FocusNode focusNode,
+  String label,
+  String? Function(String?)? validator, {
+  bool? isPassword,
+  Function()? onPressed,
+  Function(String)? onChanged,
+}) {
+  return TextFormField(
+    controller: controller,
+    validator: validator,
+    onChanged: onChanged,
+    // autocorrect: true,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    focusNode: focusNode,
+    obscureText: isPassword == null ? false : isPassword,
+    // Set obscureText to true for password fields
+    style: TextStyle(color: Colors.white, fontSize: 15),
+    decoration: InputDecoration(
+        labelText: label,
+        labelStyle: TextStyle(
+          color: focusNode.hasFocus ? Colors.white : Colors.white,
+        ),
+        hintStyle: TextStyle(
+          color: Colors.white,
+        ),
+        hintText: label,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: focusNode.hasFocus ? Colors.white : Colors.white,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: focusNode.hasFocus ? Colors.white : Colors.white,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        suffixIcon: isPassword == null
+            ? SizedBox()
+            : IconButton(
+                icon: Icon(
+                  isPassword == false ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.white,
+                ),
+                onPressed: onPressed,
+              )),
+  );
+}
+
 Widget textField({
   required BuildContext context,
   required var hint,
@@ -41,6 +99,7 @@ Widget textField({
             borderRadius: const BorderRadius.all(const Radius.circular(8)),
           ),
           errorBorder: OutlineInputBorder(
+            gapPadding: 10,
             borderSide: BorderSide(color: Colors.red),
             borderRadius: const BorderRadius.all(Radius.circular(8)),
           ),
@@ -63,8 +122,6 @@ Widget textField({
     ),
   );
 }
-
-
 
 bool isVisible = true;
 
