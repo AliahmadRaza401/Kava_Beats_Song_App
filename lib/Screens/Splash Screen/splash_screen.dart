@@ -23,7 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() => isAnimate = true);
     });
 
-    var userLoggedIn = ShearedprefService.getUserLoggedIn();
+    timer();
+  }
+
+  timer() async {
+    var userLoggedIn = await ShearedprefService.getUserLoggedIn();
+    print('userLoggedIn: ${userLoggedIn}');
     Future.delayed(const Duration(seconds: 3), () {
       if (userLoggedIn == true) {
         AppRoutes.pushAndRemoveUntil(context, HomeScreen());
