@@ -159,67 +159,81 @@ class _Book2ScreenState extends State<Book2Screen> {
                       ? Center(
                           child: CircularProgressIndicator(
                             color:
-                                Theme.of(context).appBarTheme.backgroundColor,
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.white
+                                    : Colors.black,
                           ),
                         )
-                      : searchList.isNotEmpty
-                          ? ListView.builder(
-                              itemCount: searchList.length,
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      bottom: 10, right: 0, left: 0),
-                                  child: Card(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.withOpacity(0.2),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: ListTile(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      BookDetailScreen(
-                                                        book: searchList[index],
-                                                      )));
-                                        },
-                                        horizontalTitleGap: 10,
-                                        leading: Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 5,
+                      : fetchedBooks.isEmpty
+                          ? Center(
+                              child:
+                                  Text("Oops! No Data please try again later"),
+                            )
+                          : searchList.isNotEmpty
+                              ? ListView.builder(
+                                  itemCount: searchList.length,
+                                  physics: const BouncingScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 10, right: 0, left: 0),
+                                      child: Card(
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.withOpacity(0.2),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
                                           ),
-                                          child: Text(
-                                            searchList[index].number.toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2,
+                                          child: ListTile(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          BookDetailScreen(
+                                                            book: searchList[
+                                                                index],
+                                                          )));
+                                            },
+                                            horizontalTitleGap: 10,
+                                            leading: Padding(
+                                              padding: const EdgeInsets.only(
+                                                left: 5,
+                                              ),
+                                              child: Text(
+                                                searchList[index]
+                                                    .number
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2,
+                                              ),
+                                            ),
+                                            title: Text(
+                                                searchList[index]
+                                                    .title
+                                                    .toString(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .bodyText2),
+                                            // trailing: const Icon(
+                                            //   Icons.arrow_forward,
+                                            //   color: Colors.black,
+                                            // ),
                                           ),
                                         ),
-                                        title: Text(
-                                            searchList[index].title.toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyText2),
-                                        // trailing: const Icon(
-                                        //   Icons.arrow_forward,
-                                        //   color: Colors.black,
-                                        // ),
                                       ),
-                                    ),
-                                  ),
-                                );
-                              })
-                          : const Center(
-                              child: Text(
-                              "No data found",
-                            )))
+                                    );
+                                  })
+                              : const Center(
+                                  child: Text(
+                                  "No data found",
+                                )))
             ],
           ),
         ),

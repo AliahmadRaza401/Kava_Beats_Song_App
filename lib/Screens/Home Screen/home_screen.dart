@@ -26,6 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: Theme.of(context).appBarTheme.elevation,
           backgroundColor: Theme.of(context).backgroundColor,
           iconTheme: Theme.of(context).appBarTheme.iconTheme,
+          title: Text(
+            "Kava Beats",
+            style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 23,
+                fontFamily: "Kavoon"),
+          ),
+          centerTitle: true,
           actions: [
             // Padding(
             //   padding: const EdgeInsets.only(right: 10),

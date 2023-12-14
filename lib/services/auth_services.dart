@@ -20,51 +20,56 @@ class AuthServices {
     final auth = FirebaseAuth.instance;
     AuthController authController = Get.put(AuthController());
     authController.updateLoading(true);
-    try {
-      await auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((uid) => {
-                log('User Side '),
-                ShearedprefService.setUserTpe('user'),
-                ShearedprefService.setUserIDStore(uid.user!.uid),
-                ShearedprefService.setUserLoggedIn(true),
-                AppRoutes.pushAndRemoveUntil(
-                  context,
-                  const HomeScreen(),
-                ),
-                AppToast('LogIn Success', false),
-                authController.updateLoading(false),
-              });
-    } on FirebaseAuthException catch (error) {
-      switch (error.code) {
-        case "invalid-email":
-          errorMessage = "Your email address is invalid.";
-          break;
-        case "wrong-password":
-          errorMessage = "Your password is wrong.";
-          break;
-        case "user-not-found":
-          errorMessage = "User with this email doesn't exist.";
-          break;
-        case "user-disabled":
-          errorMessage = "User with this email has been disabled.";
-          break;
-        case "too-many-requests":
-          errorMessage = "Too many requests";
-          break;
-        case "operation-not-allowed":
-          errorMessage = "Signing in with Email and Password is not enabled.";
-          break;
-        default:
-          errorMessage = "your password or email address is invalid";
+
+    await auth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((uid) => {
+              log('User Side '),
+              ShearedprefService.setUserTpe('user'),
+              ShearedprefService.setUserIDStore(uid.user!.uid),
+              ShearedprefService.setUserLoggedIn(true),
+              AppRoutes.pushAndRemoveUntil(
+                context,
+                const HomeScreen(),
+              ),
+              AppToast('LogIn Success', false),
+              authController.updateLoading(false),
+            })
+        .catchError((e) {
+      String errorMessage = "An undefined Error happened.";
+
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case "invalid-email":
+            errorMessage = "Your email address is invalid";
+            break;
+          case "wrong-password":
+            errorMessage = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Signing in with Email and Password is not enabled.";
+            break;
+          case "email-already-in-use":
+            errorMessage =
+                "The email address is already in use by another account.";
+            break;
+          default:
+            errorMessage = "Oops! Your email password is invalid";
+        }
       }
+
       authController.updateLoading(false);
-
-      // // GeneralDialogs.showOopsDialog(context, errorMessage);
-      AppToast("UnAuthorized", false);
-
-      return "false";
-    }
+      AppToast("$errorMessage", false);
+    });
   }
 
   // SignUp-----------------------------------------
@@ -77,56 +82,54 @@ class AuthServices {
     AuthController authController = Get.put(AuthController());
 
     authController.updateLoading(true);
-    try {
-      print("User Creating_________");
 
-      await _auth
-          .createUserWithEmailAndPassword(email: email, password: pass)
-          .then((value) => {
-                print("User Created_________"),
-                // FirebaseFirestore.instance.collection('users').doc().set({
-                //   'name': name,
-                //   'email': email,
-                //   "password": pass,
-                // }),
-                authController.updateLoading(false),
-                AppRoutes.pop(context),
-                AppToast('User Created Successfully', true),
-              })
-          .catchError((e) {
-        print('catchError e: $e');
+    print("User Creating_________");
 
-        AppToast("Error", false);
+    await _auth
+        .createUserWithEmailAndPassword(email: email, password: pass)
+        .then((value) => {
+              print("User Created_________"),
+              authController.updateLoading(false),
+              AppRoutes.pop(context),
+              AppToast('User Created Successfully', true),
+            })
+        .catchError((e) {
+      print('catchError e: $e');
 
-        authController.updateLoading(false);
-      });
-    } on FirebaseAuthException catch (error) {
-      switch (error.code) {
-        case "invalid-email":
-          errorMessage = "Your email address is invalid";
-          break;
-        case "wrong-password":
-          errorMessage = "Your password is wrong.";
-          break;
-        case "user-not-found":
-          errorMessage = "User with this email doesn't exist.";
-          break;
-        case "user-disabled":
-          errorMessage = "User with this email has been disabled.";
-          break;
-        case "too-many-requests":
-          errorMessage = "Too many requests";
-          break;
-        case "operation-not-allowed":
-          errorMessage = "Signing in with Email and Password is not enabled.";
-          break;
-        default:
-          errorMessage = "An undefined Error happened.";
+      String errorMessage = "An undefined Error happened.";
+
+      if (e is FirebaseAuthException) {
+        switch (e.code) {
+          case "invalid-email":
+            errorMessage = "Your email address is invalid";
+            break;
+          case "wrong-password":
+            errorMessage = "Your password is wrong.";
+            break;
+          case "user-not-found":
+            errorMessage = "User with this email doesn't exist.";
+            break;
+          case "user-disabled":
+            errorMessage = "User with this email has been disabled.";
+            break;
+          case "too-many-requests":
+            errorMessage = "Too many requests";
+            break;
+          case "operation-not-allowed":
+            errorMessage = "Signing in with Email and Password is not enabled.";
+            break;
+          case "email-already-in-use":
+            errorMessage =
+                "The email address is already in use by another account.";
+            break;
+          default:
+            errorMessage = "Oops! Something wrong try later";
+        }
       }
 
       authController.updateLoading(false);
       AppToast("$errorMessage", false);
-    }
+    });
   }
 
   // static getUserFromGoogle(BuildContext context) async {

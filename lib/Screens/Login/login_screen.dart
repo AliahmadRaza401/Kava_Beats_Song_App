@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  bool isPass = false;
+  bool isPass = true;
   FocusNode emailFocusNode = FocusNode();
   FocusNode pasFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
@@ -57,18 +57,31 @@ class _LoginScreenState extends State<LoginScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              "Login",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Roboto",
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w900),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Kavoon",
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w900),
+                                ),
+                                Text(
+                                  "Enter your email and password for login",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Roboto",
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 40,
                         ),
                         customInputField(
                           email,
@@ -120,8 +133,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                         "Login",
                                         style: TextStyle(
                                             color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
+                                            fontSize: 20,
+                                            fontFamily: "Kavoon",
+                                            fontWeight: FontWeight.normal),
                                       )),
                                 ),
                         ),

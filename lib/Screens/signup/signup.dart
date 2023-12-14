@@ -20,7 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController password = TextEditingController();
   bool isTermsConditions = false;
 
-  bool isPass = false;
+  bool isPass = true;
   FocusNode emailFocusNode = FocusNode();
   FocusNode pasFocusNode = FocusNode();
   final _formKey = GlobalKey<FormState>();
@@ -58,18 +58,31 @@ class _SignupScreenState extends State<SignupScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              "SignUp",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "Roboto",
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w900),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Create Account",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Kavoon",
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w900),
+                                ),
+                                Text(
+                                  "Enter your email and password for signup",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: "Roboto",
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.normal),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 40,
                         ),
                         customInputField(
                           email,
@@ -93,7 +106,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     Column(
                       children: [
                         Obx(() => authController.loading.value
-                            ? CircularProgressIndicator(color: Colors.white,)
+                            ? CircularProgressIndicator(
+                                color: Colors.white,
+                              )
                             : SizedBox(
                                 height: 50,
                                 width: width * 0.85,
@@ -107,11 +122,12 @@ class _SignupScreenState extends State<SignupScreen> {
                                           context, email.text, password.text);
                                     },
                                     child: const Text(
-                                      "SignUp",
+                                      "Sign Up",
                                       style: TextStyle(
                                           color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
+                                          fontSize: 20,
+                                          fontFamily: "Kavoon",
+                                          fontWeight: FontWeight.normal),
                                     )),
                               )),
                         SizedBox(
