@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kava_beats_app/services/auth_services.dart';
+import 'package:kava_beats_app/services/shearedpref_service.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:kava_beats_app/Constants/colors.dart';
@@ -19,6 +20,18 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   @override
   void initState() {
     super.initState();
+    getUserLogin();
+  }
+
+  bool userLoggedIn = false;
+
+  getUserLogin() async {
+    var login = await ShearedprefService.getUserLoggedIn();
+    print('login: ${login}');
+
+    setState(() {
+      userLoggedIn = login;
+    });
   }
 
   @override
@@ -128,35 +141,41 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                 },
                 trailing: ChangeThemeButtonWidget(),
               ),
-              ListTile(
-                leading: Icon(
-                  Icons.logout_rounded,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : primaryClr,
-                ),
-                title: const Text('Log Out', style: TextStyle(fontSize: 14)),
-                onTap: () {
-                  AuthServices.signOut(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.person_off_outlined,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : primaryClr,
-                ),
-                title: const Text('Delete Account',
-                    style: TextStyle(fontSize: 14)),
-                onTap: () {
-                  showContactDeleteDialog(context);
-                },
-                trailing: Icon(
-                  Icons.delete,
-                  color: Colors.red,
-                ),
-              ),
+
+              userLoggedIn == false
+                  ? SizedBox()
+                  : ListTile(
+                      leading: Icon(
+                        Icons.logout_rounded,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : primaryClr,
+                      ),
+                      title:
+                          const Text('Log Out', style: TextStyle(fontSize: 14)),
+                      onTap: () {
+                        AuthServices.signOut(context);
+                      },
+                    ),
+              userLoggedIn == false
+                  ? SizedBox()
+                  : ListTile(
+                      leading: Icon(
+                        Icons.person_off_outlined,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : primaryClr,
+                      ),
+                      title: const Text('Delete Account',
+                          style: TextStyle(fontSize: 14)),
+                      onTap: () {
+                        showContactDeleteDialog(context);
+                      },
+                      trailing: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                    ),
               Spacer(),
 
               Container(

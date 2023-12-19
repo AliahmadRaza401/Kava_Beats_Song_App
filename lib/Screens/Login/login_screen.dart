@@ -177,6 +177,32 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => HomeScreen()));
+                              },
+                              child: Text(
+                                "Continue as a Guest",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "Roboto",
+                                    fontSize: 15,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.white,
+                                    decorationThickness: 2,
+                                    decorationStyle: TextDecorationStyle.solid,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ],

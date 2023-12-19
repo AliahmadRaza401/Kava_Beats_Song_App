@@ -140,40 +140,57 @@ class _BookDetailScreenState extends State<BookDetailScreen> {
         ),
       ),
       floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          FloatingActionButton(
-            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-            onPressed: () {
-              textSize <= 10
-                  ? const SizedBox()
-                  : setState(() {
-                      textSize -= 1;
-                      print(textSize);
-                    });
-            },
-            child: const Icon(
-              CupertinoIcons.minus,
-              color: Colors.white,
+          Container(
+            padding: EdgeInsets.only(left: 30),
+            width: 200,
+            child: FloatingActionButton(
+              backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+              onPressed: () {
+                checkUserLoginAndDisplayFeedbaackDialog(
+                    context, widget.book!.number);
+              },
+              child: Text("Write your feedback"),
             ),
           ),
-          const SizedBox(
-            width: 5,
-          ),
-          FloatingActionButton(
-            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-            onPressed: () {
-              textSize >= 50
-                  ? const SizedBox()
-                  : setState(() {
-                      textSize += 1;
-                      print(textSize);
-                    });
-            },
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              FloatingActionButton(
+                backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+                onPressed: () {
+                  textSize <= 10
+                      ? const SizedBox()
+                      : setState(() {
+                          textSize -= 1;
+                          print(textSize);
+                        });
+                },
+                child: const Icon(
+                  CupertinoIcons.minus,
+                  color: Colors.white,
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              FloatingActionButton(
+                backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+                onPressed: () {
+                  textSize >= 50
+                      ? const SizedBox()
+                      : setState(() {
+                          textSize += 1;
+                          print(textSize);
+                        });
+                },
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
         ],
       ),

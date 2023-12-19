@@ -193,6 +193,7 @@ class AuthServices {
     await FirebaseAuth.instance.signOut().then((value) {
       ShearedprefService.setUserLoggedIn(false);
       ShearedprefService.setUserTpe('');
+      ShearedprefService.setuseremail('');
       AppRoutes.pushAndRemoveUntil(
         context,
         const LoginScreen(),
