@@ -439,15 +439,15 @@ checkUserLoginAndDisplayFeedbaackDialog(context, docID) async {
   var login = await ShearedprefService.getUserLoggedIn();
   print('login: ${login}');
 
-  if (login == false || login == "") {
+  if (login == true) {
+    showFeedbackDialog(context, docID);
+  } else {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return NeedLoginDialog();
       },
     );
-  } else {
-    showFeedbackDialog(context, docID);
   }
 }
 

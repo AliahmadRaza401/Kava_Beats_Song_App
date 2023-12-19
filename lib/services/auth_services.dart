@@ -271,7 +271,7 @@ class AuthServices {
         context,
         const LoginScreen(),
       );
-      AppToast("Your account is permanently delete Successfully", false);
+      AppToast("Your account is permanently deleted Successfully", false);
     } catch (e) {
       print(e.toString());
       return null;
