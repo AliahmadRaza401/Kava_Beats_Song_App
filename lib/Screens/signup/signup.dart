@@ -4,6 +4,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:get/get.dart';
 import 'package:kava_beats_app/Screens/Home%20Screen/home_screen.dart';
 import 'package:kava_beats_app/Screens/Login/login_screen.dart';
+import 'package:kava_beats_app/Widgets/app_toast.dart';
 import 'package:kava_beats_app/Widgets/text_fields.dart';
 import 'package:kava_beats_app/controller/auth_controller.dart';
 import 'package:kava_beats_app/services/auth_services.dart';
@@ -18,11 +19,17 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController cpassword = TextEditingController();
+
   bool isTermsConditions = false;
 
   bool isPass = true;
+  bool cisPass = true;
+
   FocusNode emailFocusNode = FocusNode();
   FocusNode pasFocusNode = FocusNode();
+  FocusNode cpasFocusNode = FocusNode();
+
   final _formKey = GlobalKey<FormState>();
 
   AuthController authController = Get.put(AuthController());
@@ -101,6 +108,17 @@ class _SignupScreenState extends State<SignupScreen> {
                             isPass = !isPass;
                           });
                         }),
+                        SizedBox(height: 20.0),
+                        customInputField(
+                            cpassword,
+                            cpasFocusNode,
+                            "Confirm Password",
+                            authController.requiredValidator,
+                            isPassword: cisPass, onPressed: () {
+                          setState(() {
+                            cisPass = !cisPass;
+                          });
+                        }),
                       ],
                     ),
                     Column(
@@ -117,9 +135,17 @@ class _SignupScreenState extends State<SignupScreen> {
                                       backgroundColor: Colors.white,
                                     ),
                                     onPressed: () {
-                                      if (_formKey.currentState!.validate()) {}
-                                      AuthServices.signUp(
-                                          context, email.text, password.text);
+                                      if (cpassword.text.toString() !=
+                                          password.text.toString()) {
+                                        print("password not match");
+                                        AppToast(
+                                            "Your Password not match with confirm password",
+                                            true);
+                                      } else if (_formKey.currentState!
+                                          .validate()) {
+                                        AuthServices.signUp(
+                                            context, email.text, password.text);
+                                      } else {}
                                     },
                                     child: const Text(
                                       "Sign Up",

@@ -26,6 +26,14 @@ class _LoginScreenState extends State<LoginScreen> {
   AuthController authController = Get.put(AuthController());
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    email.clear();
+    password.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;

@@ -140,6 +140,23 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
                   AuthServices.signOut(context);
                 },
               ),
+              ListTile(
+                leading: Icon(
+                  Icons.person_off_outlined,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : primaryClr,
+                ),
+                title: const Text('Delete Account',
+                    style: TextStyle(fontSize: 14)),
+                onTap: () {
+                  showContactDeleteDialog(context);
+                },
+                trailing: Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+              ),
               Spacer(),
 
               Container(
@@ -152,6 +169,62 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           ),
         ),
       ),
+    );
+  }
+
+  void showContactDeleteDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AccountDeleteDialog(
+          onConfirm: () {
+            // Handle delete logic
+            // ...
+            AuthServices.deleteUser(context); // Close the dialog
+          },
+          onCancel: () {
+            Navigator.of(context).pop(); // Close the dialog
+          },
+        );
+      },
+    );
+  }
+}
+
+class AccountDeleteDialog extends StatelessWidget {
+  final VoidCallback onConfirm;
+  final VoidCallback onCancel;
+
+  AccountDeleteDialog({required this.onConfirm, required this.onCancel});
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoAlertDialog(
+      title: Text('Delete Account'),
+      content:
+          Text('Are you sure you want to delete this account permanently?'),
+      actions: [
+        CupertinoDialogAction(
+          onPressed: onCancel,
+          child: Text(
+            'Cancel',
+            style: TextStyle(
+              color: Theme.of(context).backgroundColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        CupertinoDialogAction(
+          onPressed: onConfirm,
+          child: Text(
+            'OK',
+            style: TextStyle(
+              color: Theme.of(context).backgroundColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -56,16 +56,30 @@ class ShearedprefService {
   }
 
   //set  Admin Password
-  static Future<void> setAdminPassword(String value) async {
+  static Future<void> setuserPassword(String value) async {
     SharedPreferences shearedPrefs = await SharedPreferences.getInstance();
 
     await shearedPrefs.setString('adminPassword', value);
   }
 
   //get Admin Password
-  static getAdminPassword() async {
+  static getuserPassword() async {
     SharedPreferences shearedPrefs = await SharedPreferences.getInstance();
 
     return shearedPrefs.getString('adminPassword');
+  }
+
+  //set  Admin Password
+  static Future<void> setuseremail(String value) async {
+    SharedPreferences shearedPrefs = await SharedPreferences.getInstance();
+
+    await shearedPrefs.setString('userEmail', value);
+  }
+
+  //get Admin Password
+  static getuseremail() async {
+    SharedPreferences shearedPrefs = await SharedPreferences.getInstance();
+
+    return shearedPrefs.getString('userEmail');
   }
 }

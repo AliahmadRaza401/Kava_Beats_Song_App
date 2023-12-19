@@ -28,6 +28,7 @@ class AuthServices {
               ShearedprefService.setUserTpe('user'),
               ShearedprefService.setUserIDStore(uid.user!.uid),
               ShearedprefService.setUserLoggedIn(true),
+              ShearedprefService.setuseremail(email),
               AppRoutes.pushAndRemoveUntil(
                 context,
                 const HomeScreen(),
@@ -246,6 +247,33 @@ class AuthServices {
       AppToast("UnAuthorized", false);
 
       return "false";
+    }
+  }
+
+  static Future deleteUser(
+    context,
+  ) async {
+    try {
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+
+      User user = await _auth.currentUser!;
+      user.delete();
+
+      // AuthCredential credentials =
+      //     EmailAuthProvider.credential(email: email, password: password);
+      // print(user);
+      // var result = await user.reauthenticateWithCredential(credentials);
+
+      ShearedprefService.setUserLoggedIn(false);
+      ShearedprefService.setUserTpe('');
+      AppRoutes.pushAndRemoveUntil(
+        context,
+        const LoginScreen(),
+      );
+      AppToast("Your account is permanently delete Successfully", false);
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
   }
 
